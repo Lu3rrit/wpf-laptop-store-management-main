@@ -12,23 +12,53 @@ namespace MyShopManagementService
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public UserService() {
-            _userRepository = new UserRepository();
+        public UserService()
+        {
             _unitOfWork = new UnitOfWork();
         }
+
         public User Get(string email)
         {
-            return _unitOfWork.UserRepository.FindUserByName(email);
+            return _unitOfWork.UserRepository.Get(email); // Thay FindUserByName bằng Get
         }
 
+        public List<User> GetAll()
+        {
+            return _unitOfWork.UserRepository.GetAll();
+        }
 
+        public List<Role> GetRoles()
+        {
+            return _unitOfWork.UserRepository.GetRoles();
+        }
 
-        public List<User> GetAll() => _userRepository.GetAll();
-        public List<Role> GetRoles() => _userRepository.GetRoles();
-        public User Get(string email) => _userRepository.Get(email);
-        public void Create(User entity) => _userRepository.Create(entity);
-        public void Update(User entity) => _userRepository.Update(entity);
-        public void Delete(string email) => _userRepository.Delete(email);
-        public bool Exist(string email) => _userRepository.Exist(email);
+        public User GetUser(string email)
+        {
+            return _unitOfWork.UserRepository.Get(email);
+        }
+
+        public void Create(User entity)
+        {
+            _unitOfWork.UserRepository.Create(entity);
+            _unitOfWork.SaveChange();
+        }
+
+        public void Update(User entity)
+        {
+            _unitOfWork.UserRepository.Update(entity);
+            _unitOfWork.SaveChange();
+        }
+
+        public void Delete(string email)
+        {
+            _unitOfWork.UserRepository.Delete(email);
+            _unitOfWork.SaveChange();
+        }
+
+        public bool Exist(string email)
+        {
+            return _unitOfWork.UserRepository.Exist(email);
+        }
     }
 }
+

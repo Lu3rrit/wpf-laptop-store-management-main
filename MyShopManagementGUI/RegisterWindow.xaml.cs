@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace MyShopManagementGUI
 {
@@ -36,15 +37,18 @@ namespace MyShopManagementGUI
         private void btnSendOtp_Click(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text.Trim().ToLower();
+            string name = txtName.Text.Trim();
+            string address = txtAddress.Text.Trim();
+            string phone = txtPhone.Text.Trim();
             string password = txtPassword.Password;
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please enter email and password!", "Register Fail", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please enter email, name, and password!", "Register Fail", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            var existingUser = _unitOfWork.UserRepository.FindUserByName(email);
+            var existingUser = _unitOfWork.UserRepository.Get(email); // Thay FindUserByName bằng Get
             if (existingUser != null)
             {
                 MessageBox.Show("Email already exists!", "Register Fail", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -54,12 +58,15 @@ namespace MyShopManagementGUI
             _newUser = new User
             {
                 Email = email,
+                Name = name,
+                Address = string.IsNullOrEmpty(address) ? null : address,
+                Phone = string.IsNullOrEmpty(phone) ? null : phone,
                 Password = password,
-                RoleId = 1, // Default role: Customer
-                Enabled = false // Will be enabled after OTP verification
+                RoleId = 1,        // Default role: Customer
+                Enabled = false    // Will be enabled after OTP verification
             };
 
-            _unitOfWork.UserRepository.Add(_newUser);
+            _unitOfWork.UserRepository.Create(_newUser); // Thay Add bằng Create
             _unitOfWork.SaveChange();
 
             _otp = _emailSender.GetOTP();
@@ -68,7 +75,7 @@ namespace MyShopManagementGUI
             if (!emailSent)
             {
                 MessageBox.Show("Failed to send OTP. Please check your email address!", "Register Fail", MessageBoxButton.OK, MessageBoxImage.Information);
-                _unitOfWork.UserRepository.Delete(_newUser);
+                _unitOfWork.UserRepository.Delete(_newUser.Email); // Thay Delete(User) bằng Delete(string email)
                 _unitOfWork.SaveChange();
                 return;
             }
@@ -134,5 +141,6 @@ namespace MyShopManagementGUI
         }
     }
 }
+
 
 

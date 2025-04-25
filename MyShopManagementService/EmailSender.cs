@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
+using MimeKit.Text;
 
 namespace MyShopManagementService
 {
@@ -13,12 +14,13 @@ namespace MyShopManagementService
     {
         public bool SendEmail(string toEmail, string subject, string mess)
         {
-            var fromEmail = "linhtkhe173474@fpt.edu.vn"; var pass = "hqvx uylj pzjx ytjc";
+            var fromEmail = "linhtkhe173474@fpt.edu.vn"; 
+            var pass = "hqvx uylj pzjx ytjc";
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(fromEmail));
             email.To.Add(MailboxAddress.Parse(toEmail));
             email.Subject = subject;
-            email.Body = new MimeKit.TextPart(MimeKit.Text.TextFormat.Html) { Text = mess };
+            email.Body = new TextPart(TextFormat.Html) { Text = mess };
 
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
@@ -26,7 +28,6 @@ namespace MyShopManagementService
 
             try
             {
-                var mailAddress = new MailAddress(toEmail);
                 smtp.Send(email);
                 return true;
             }
@@ -47,6 +48,7 @@ namespace MyShopManagementService
         }
     }
 }
+
 
 
 

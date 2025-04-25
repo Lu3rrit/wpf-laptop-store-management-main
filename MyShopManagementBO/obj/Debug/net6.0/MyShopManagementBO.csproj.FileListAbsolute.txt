@@ -21,6 +21,7 @@ F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj
 F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\MyShopManagementBO.AssemblyInfoInputs.cache
 F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\MyShopManagementBO.AssemblyInfo.cs
 F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\MyShopManagementBO.csproj.CoreCompileInputs.cache
+F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\MyShopManagementBO.sourcelink.json
 F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\MyShopManagementBO.dll
 F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\refint\MyShopManagementBO.dll
 F:\down\FU\Ki8\PRN212_B5\wpf-laptop-store-management-main\MyShopManagementBO\obj\Debug\net6.0\MyShopManagementBO.pdb

@@ -12,8 +12,6 @@ namespace MyShopManagementRepository
         private bool _disposed = false;
         private readonly MyShopContext _context;
         private IUserRepository _userRepository;
-    }
-
         public UnitOfWork(MyShopContext context = null)
         {
             _context = context ?? new MyShopContext(new Microsoft.EntityFrameworkCore.DbContextOptions<MyShopContext>());
